@@ -36,18 +36,26 @@ public class Toolbar extends JPanel {
 			JButton clicked = (JButton) e.getSource();
 
 			if (clicked == hiButton) {
-				textPanel.append("HI ram\n");
+
+				if (stringListener != null) {
+
+					stringListener.textEmitter("HI ram\n");
+				}
 			} else {
-				textPanel.append("Bye ram\n");
+				if (stringListener != null) {
+
+					stringListener.textEmitter("Byeram\n");
+				}
 			}
 		}
 
 	};
-	private TextPanel textPanel;
 
-	public void setTextPanel(TextPanel textPanel) {
+	private StringListener stringListener;
+
+	public void setStringListener(StringListener stringListener) {
 		// TODO Auto-generated method stub
-		this.textPanel = textPanel;
+		this.stringListener = stringListener;
 	}
 
 }
