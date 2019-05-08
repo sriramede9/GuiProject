@@ -14,6 +14,7 @@ public class MainFrame extends JFrame {
 	private StringListener stringListener;
 	
 	private FormPanel formPanel;
+	
 
 	public MainFrame() {
 		super("Hello");
@@ -25,6 +26,24 @@ public class MainFrame extends JFrame {
 		toolbar = new Toolbar();
 		
 		formPanel=new FormPanel();
+		
+		formPanel.setStringListener(new StringListener() {
+			
+			@Override
+			public void textEmitter(String s) {
+				// TODO Auto-generated method stub
+				textPanel.append(s);
+			}
+		});
+		
+		formPanel.setFormListener(new FormListener() {
+			public void formEventOccured(FormEvent e) {
+				String nameString=e.getName();
+				String occupationString=e.getOccupation();
+				Integer ageCategory=e.getAgeCategory();
+				textPanel.append("Name : "+nameString+" \t"+"Occupation: "+occupationString+"\t"+"AgeCategory:"+ageCategory+"\n");
+			}
+		});
 
 		toolbar.setStringListener(new StringListener() {
 
@@ -32,7 +51,7 @@ public class MainFrame extends JFrame {
 			public void textEmitter(String s) {
 				// TODO Auto-generated method stub
 				textPanel.append(s);
-			}
+			} 
 		});
 		add(formPanel,BorderLayout.WEST);
 		add(toolbar, BorderLayout.NORTH);
