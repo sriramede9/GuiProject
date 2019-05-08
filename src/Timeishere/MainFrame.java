@@ -40,8 +40,9 @@ public class MainFrame extends JFrame {
 			public void formEventOccured(FormEvent e) {
 				String nameString=e.getName();
 				String occupationString=e.getOccupation();
-				Integer ageCategory=e.getAgeCategory();
-				textPanel.append("Name : "+nameString+" \t"+"Occupation: "+occupationString+"\t"+"AgeCategory:"+ageCategory+"\n");
+				String ageCategory=e.getAgeCategory().getAgecategory();
+				String empstatus=e.getEmpStatus().getStatus();
+				textPanel.append("Name : "+nameString+" \t"+"Occupation: "+occupationString+"\t"+"AgeCategory:"+ageCategory+"\t"+"Emp-Status:"+empstatus+"\t"+"\n");
 			}
 		});
 

@@ -6,14 +6,15 @@ public class FormEvent extends EventObject{
 
 	private String name;
 	private String occupation;
-	private Integer ageCategory;
+	private AgeCategory ageCategory;
+	private EmpStatus empStatus;
 	
-	public Integer getAgeCategory() {
+	public AgeCategory getAgeCategory() {
 		return ageCategory;
 	}
 
 
-	public void setAgeCategory(Integer ageCategory) {
+	public void setAgeCategory(AgeCategory ageCategory) {
 		this.ageCategory = ageCategory;
 	}
 
@@ -25,11 +26,22 @@ public class FormEvent extends EventObject{
 	}
 	
 
-	public FormEvent(Object source, String name, String occupation, Integer ageCategory) {
+	public FormEvent(Object source, String name, String occupation, AgeCategory ageCategory2, EmpStatus empStatus) {
 		super(source);
 		this.name = name;
 		this.occupation = occupation;
-		this.ageCategory=ageCategory;
+		this.ageCategory=ageCategory2;
+		this.empStatus=empStatus;
+	}
+
+
+	public EmpStatus getEmpStatus() {
+		return empStatus;
+	}
+
+
+	public void setEmpStatus(EmpStatus empStatus) {
+		this.empStatus = empStatus;
 	}
 
 
