@@ -31,6 +31,9 @@ public class FormPanel extends JPanel {
 	private JComboBox empComboBox;
 	private JLabel empstatusLabel;
 	private JCheckBox citizenCheckBox;
+	private JTextField taxField;
+	private JLabel taxLabel;
+	private JLabel citizenLabel;
 
 	public FormPanel() {
 		super();
@@ -45,7 +48,10 @@ public class FormPanel extends JPanel {
 		ageCategoryLabel = new JLabel("Age Category:");
 		empComboBox = new JComboBox();
 		empstatusLabel = new JLabel("Emp-status:");
-		citizenCheckBox=new JCheckBox();
+		citizenCheckBox = new JCheckBox();
+		taxField = new JTextField(10);
+		taxLabel = new JLabel("Enter-Sin:");
+		citizenLabel = new JLabel("Us-Citizen:");
 		// list componenets
 
 		DefaultListModel ageModel = new DefaultListModel();
@@ -56,6 +62,23 @@ public class FormPanel extends JPanel {
 		ageList.setModel(ageModel);
 		ageList.setPreferredSize(new Dimension(110, 60));
 		// grid bag layout
+
+		// set up tax id;
+
+		taxLabel.setEnabled(false);
+		taxField.setEnabled(false);
+
+		citizenCheckBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				boolean isTicked = citizenCheckBox.isSelected();
+
+				taxLabel.setEnabled(isTicked);
+				taxField.setEnabled(isTicked);
+			}
+		});
 
 		// set up list of compbo box.
 
@@ -83,12 +106,12 @@ public class FormPanel extends JPanel {
 			String name = nameField.getText();
 			String occupation = occupationField.getText();
 			AgeCategory ageCategory = new AgeCategory((String) ageList.getSelectedValue(), ageList.getSelectedIndex());
-			EmpStatus empStatus=new EmpStatus(empComboBox.getSelectedIndex(),(String)empComboBox.getSelectedItem());
-			
-			FormEvent froEvent = new FormEvent(this, name, occupation, ageCategory,empStatus);
+			String taxid=taxField.getText()+"";
+			boolean usCitizen=citizenCheckBox.isSelected();
+			EmpStatus empStatus = new EmpStatus(empComboBox.getSelectedIndex(), (String) empComboBox.getSelectedItem());
+
+			FormEvent froEvent = new FormEvent(this, name, occupation, ageCategory, empStatus,taxid,usCitizen);
 			// stringListener.textEmitter;
-			
-			
 
 			if (formlistener != null) {
 				formlistener.formEventOccured(froEvent);
@@ -184,9 +207,48 @@ public class FormPanel extends JPanel {
 		gConstraints.insets = new Insets(0, 0, 0, 5);
 
 		add(empstatusLabel, gConstraints);
+
+		///// check box row ///
+		gConstraints.gridy++;
+
+		// check box
+		gConstraints.gridx = 1;
+		gConstraints.anchor = gConstraints.LINE_START;
+		gConstraints.insets = new Insets(0, 0, 0, 0);
+		add(citizenCheckBox, gConstraints);
 		
 		
-		/////check box row ///
+		// checkbox label
+		gConstraints.gridx = 0;
+
+		gConstraints.anchor = gConstraints.LINE_END;
+		gConstraints.insets = new Insets(0, 0, 0, 5);
+		
+		
+		add(citizenLabel, gConstraints);
+		
+		// tax row
+		
+		
+		// tax box
+		gConstraints.gridy++;
+
+		
+		gConstraints.gridx = 1;
+		gConstraints.anchor = gConstraints.LINE_START;
+		gConstraints.insets = new Insets(0, 0, 0, 0);
+		add(taxField, gConstraints);
+		
+		// tax label
+		gConstraints.gridx = 0;
+
+		gConstraints.anchor = gConstraints.LINE_END;
+		gConstraints.insets = new Insets(0, 0, 0, 5);
+		
+		
+		add(taxLabel, gConstraints);
+		
+		
 
 		///// Button row ////////
 
