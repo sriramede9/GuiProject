@@ -44,7 +44,8 @@ public class MainFrame extends JFrame {
 				String empstatus=e.getEmpStatus().getStatus();
 				String taxID=e.getTaxid();
 				boolean isUscitizen=e.isUscitizen();
-				textPanel.append("Name : "+nameString+" \t"+"Occupation: "+occupationString+"\t"+"AgeCategory:"+ageCategory+"\t"+"Emp-Status:"+empstatus+"\t"+"tax Id:"+taxID+"\t"+"is UsCitizen:"+isUscitizen+"\t"+"\n");
+				String gendergroup=e.getGendergroup();
+				textPanel.append("Name : "+nameString+" \t"+"Occupation: "+occupationString+"\t"+"AgeCategory:"+ageCategory+"\t"+"Emp-Status:"+empstatus+"\t"+"tax Id:"+taxID+"\t"+"is UsCitizen:"+isUscitizen+"\t"+"Gender group:"+gendergroup+"\t"+"\n");
 			}
 		});
 

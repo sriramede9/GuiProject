@@ -7,6 +7,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -15,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class FormPanel extends JPanel {
@@ -34,6 +36,10 @@ public class FormPanel extends JPanel {
 	private JTextField taxField;
 	private JLabel taxLabel;
 	private JLabel citizenLabel;
+	private JRadioButton maleRadioButton;
+	private JRadioButton femaleRadioButton;
+	private ButtonGroup genderGroup;
+	private JLabel genderLabel;
 
 	public FormPanel() {
 		super();
@@ -52,6 +58,22 @@ public class FormPanel extends JPanel {
 		taxField = new JTextField(10);
 		taxLabel = new JLabel("Enter-Sin:");
 		citizenLabel = new JLabel("Us-Citizen:");
+		maleRadioButton=new JRadioButton("Male");
+		femaleRadioButton=new JRadioButton("Female");
+		genderLabel=new JLabel("Gender:");
+		
+		genderGroup=new ButtonGroup();
+		
+		maleRadioButton.setSelected(true);
+		
+		maleRadioButton.setActionCommand("male");
+		femaleRadioButton.setActionCommand("female");
+		
+		//set up gender radio buttons
+		
+		genderGroup.add(maleRadioButton);
+		genderGroup.add(femaleRadioButton);
+		
 		// list componenets
 
 		DefaultListModel ageModel = new DefaultListModel();
@@ -85,7 +107,7 @@ public class FormPanel extends JPanel {
 		DefaultComboBoxModel emp = new DefaultComboBoxModel<>();
 		emp.addElement("Employed");
 		emp.addElement("Self-Employed");
-		emp.addElement("UnEmployed");
+		emp.addElement("UnEmplo yed");
 
 		empComboBox.setModel(emp);
 
@@ -109,8 +131,8 @@ public class FormPanel extends JPanel {
 			String taxid=taxField.getText()+"";
 			boolean usCitizen=citizenCheckBox.isSelected();
 			EmpStatus empStatus = new EmpStatus(empComboBox.getSelectedIndex(), (String) empComboBox.getSelectedItem());
-
-			FormEvent froEvent = new FormEvent(this, name, occupation, ageCategory, empStatus,taxid,usCitizen);
+			String gendergroup=genderGroup.getSelection().getActionCommand();
+			FormEvent froEvent = new FormEvent(this, name, occupation, ageCategory, empStatus,taxid,usCitizen,gendergroup);
 			// stringListener.textEmitter;
 
 			if (formlistener != null) {
@@ -247,6 +269,34 @@ public class FormPanel extends JPanel {
 		
 		
 		add(taxLabel, gConstraints);
+		
+		///  gender radio button/////
+		
+		//rows male one
+		gConstraints.gridy++;
+		
+		gConstraints.gridx = 1;
+		gConstraints.anchor = gConstraints.LINE_START;
+		gConstraints.insets = new Insets(0, 0, 0, 0);
+		add(maleRadioButton, gConstraints); 
+		
+		//label
+		
+		gConstraints.gridx = 0;
+
+		gConstraints.anchor = gConstraints.LINE_END;
+		gConstraints.insets = new Insets(0, 0, 0, 5);
+		
+		add(genderLabel, gConstraints);
+		
+		//female radio button
+		gConstraints.gridy++;
+		
+		gConstraints.gridx = 1;
+		gConstraints.anchor = gConstraints.LINE_START;
+		gConstraints.insets = new Insets(0, 0, 0, 0);
+		add(femaleRadioButton, gConstraints);
+		
 		
 		
 
