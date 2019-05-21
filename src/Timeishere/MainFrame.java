@@ -1,6 +1,7 @@
 package Timeishere;
 
 import java.awt.BorderLayout;
+
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import controller.Controller;
+
 public class MainFrame extends JFrame {
 
 	private TextPanel textPanel;
@@ -24,6 +27,9 @@ public class MainFrame extends JFrame {
 	private FormPanel formPanel;
 	
 	private JFileChooser fileChooser;
+	
+	//Main Frame is communicating with controller as it should never ever communicate with model.
+	private controller.Controller controller;
 
 	public MainFrame() {
 		super("Hello");
@@ -37,6 +43,8 @@ public class MainFrame extends JFrame {
 		formPanel = new FormPanel();
 		
 		fileChooser=new JFileChooser();
+		
+		controller=new Controller();
 		
 		fileChooser.addChoosableFileFilter(new PersonFileFilter());
 
@@ -53,16 +61,18 @@ public class MainFrame extends JFrame {
 
 		formPanel.setFormListener(new FormListener() {
 			public void formEventOccured(FormEvent e) {
-				String nameString = e.getName();
-				String occupationString = e.getOccupation();
-				String ageCategory = e.getAgeCategory().getAgecategory();
-				String empstatus = e.getEmpStatus().getStatus();
-				String taxID = e.getTaxid();
-				boolean isUscitizen = e.isUscitizen();
-				String gendergroup = e.getGendergroup();
-				textPanel.append("Name : " + nameString + " \t" + "Occupation: " + occupationString + "\t"
-						+ "AgeCategory:" + ageCategory + "\t" + "Emp-Status:" + empstatus + "\t" + "tax Id:" + taxID
-						+ "\t" + "is UsCitizen:" + isUscitizen + "\t" + "Gender group:" + gendergroup + "\t" + "\n");
+//				String nameString = e.getName();
+//				String occupationString = e.getOccupation();
+//				String ageCategory = e.getAgeCategory().getAgecategory();
+//				String empstatus = e.getEmpStatus().getStatus();
+//				String taxID = e.getTaxid();
+//				boolean isUscitizen = e.isUscitizen();
+//				String gendergroup = e.getGendergroup();
+//				textPanel.append("Name : " + nameString + " \t" + "Occupation: " + occupationString + "\t"
+//						+ "AgeCategory:" + ageCategory + "\t" + "Emp-Status:" + empstatus + "\t" + "tax Id:" + taxID
+//						+ "\t" + "is UsCitizen:" + isUscitizen + "\t" + "Gender group:" + gendergroup + "\t" + "\n");
+				
+				controller.accept(e);
 			}
 		});
 
