@@ -28,6 +28,8 @@ public class MainFrame extends JFrame {
 	
 	private JFileChooser fileChooser;
 	
+	private TablePanel tablePanel;
+	
 	//Main Frame is communicating with controller as it should never ever communicate with model.
 	private controller.Controller controller;
 
@@ -42,9 +44,13 @@ public class MainFrame extends JFrame {
 
 		formPanel = new FormPanel();
 		
+		tablePanel=new TablePanel();
+		
 		fileChooser=new JFileChooser();
 		
 		controller=new Controller();
+		
+		tablePanel.setData(controller.getPeople());
 		
 		fileChooser.addChoosableFileFilter(new PersonFileFilter());
 
@@ -86,7 +92,7 @@ public class MainFrame extends JFrame {
 		});
 		add(formPanel, BorderLayout.WEST);
 		add(toolbar, BorderLayout.NORTH);
-		add(textPanel, BorderLayout.CENTER);
+		add(tablePanel, BorderLayout.CENTER);
 
 		setSize(600, 500);
 		setMinimumSize(new Dimension(500,400));

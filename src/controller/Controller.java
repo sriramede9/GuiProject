@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import Timeishere.FormEvent;
 import model.AgeCategory;
 import model.Database;
@@ -10,6 +12,11 @@ import model.Person;
 public class Controller {
 
 	Database database = new Database();
+	
+	public List<Person> getPeople(){
+		
+	return	database.getPeople();
+	}
 
 	public void accept(FormEvent e) {
 		// TODO Auto-generated method stub
